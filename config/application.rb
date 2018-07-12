@@ -19,5 +19,6 @@ Bundler.require(*Rails.groups)
 module Forms
   class Application < Rails::Application
     config.api_only = true
+    config.middleware.use Rack::Attack
   end
 end
