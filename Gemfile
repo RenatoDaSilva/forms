@@ -1,26 +1,25 @@
 source 'https://rubygems.org'
 
 git_source(:github) do |repo_name|
-  repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
+  repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?('/')
   "https://github.com/#{repo_name}.git"
 end
 
-gem 'omniauth'
 gem 'devise_token_auth'
-gem 'rack-cors'
-gem 'rack-attack'
-
 gem 'friendly_id', '~> 5.1.0'
-
-gem 'rails', '~> 5.0.1'
+gem 'omniauth'
 gem 'pg', '~> 0.18'
 gem 'puma', '~> 3.0'
+gem 'rack-attack'
+gem 'rack-cors'
+gem 'rails', '~> 5.0.1'
+gem 'rubocop', require: false
 
 group :development, :test do
-  gem 'rspec-rails', '~> 3.5'
+  gem 'byebug', platform: :mri
   gem 'factory_girl_rails'
   gem 'ffaker'
-  gem 'byebug', platform: :mri
+  gem 'rspec-rails', '~> 3.5'
 end
 
 group :development do
