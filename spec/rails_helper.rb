@@ -44,6 +44,11 @@ ary.
 
 Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 
+# Custom json helpers
+config.include Requests::JsonHelpers, type: :request
+# Custom Header helpers
+config.include Requests::HeaderHelpers, type: :request
+
 config.include Devise::Test::ControllerHelpers, type: :controller
 
     # Settings in config/environments/* take precedence over those specified here.
