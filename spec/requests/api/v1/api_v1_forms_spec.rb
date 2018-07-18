@@ -41,18 +41,24 @@ RSpec.describe "Api::V1::Forms", type: :request do
       context "is enabled" do
         before do
           @form = create(:form, user: @user, enable: true)
+          @question1 = create(:question, form: @form)
+          @question2 = create(:question, form: @form)
+ 
+          get "/api/v1/forms/#{@form.friendly_id}", params: {}, 
+          vvheaders: header_with_authentication(@user)
         end
 
         it "returns Request OK" do
-          get "/api/v1/forms/#{@form.friendly_id}", params: {}, 
-            headers: header_with_authentication(@user)
           expect_status(200)
         end
 
         it "returned form with right datas" do
-          get "/api/v1/forms/#{@form.friendly_id}", params: {}, 
-            headers: header_with_authentication(@user)
           expect(json).to eql(JSON.parse(@form.to_json))
+        end
+
+        it "returned associated questions" do
+          expect(json['questions'].first).to eql(JSON.parse(@question1.to_json))
+          expect(json['questions'].last).to  eql(JSON.parse(@question2.to_json))
         end
       end
 
@@ -221,6 +227,10 @@ RSpec.describe "Api::V1::Forms", type: :request do
 
           it "form are deleted" do
             expect(Form.all.count).to eql(0)
+          end
+ 
+          it "associated question are deleted" do
+            expect(Question.all.count).to eql(0)
           end
         end
 
