@@ -8,5 +8,5 @@ module Api::V1
       render(json: {message: "Required parameter missing: #{parameter_missing_exception.param}"}, 
         status: :bad_request)
     end
-   end
+  end
 end
