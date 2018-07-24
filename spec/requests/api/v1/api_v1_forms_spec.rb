@@ -44,8 +44,7 @@ RSpec.describe "Api::V1::Forms", type: :request do
           @question1 = create(:question, form: @form)
           @question2 = create(:question, form: @form)
  
-          get "/api/v1/forms/#{@form.friendly_id}", params: {}, 
-          vvheaders: header_with_authentication(@user)
+          get "/api/v1/forms/#{@form.friendly_id}", params: {}, headers: header_with_authentication(@user)
         end
 
         it "returns Request OK" do
@@ -53,7 +52,7 @@ RSpec.describe "Api::V1::Forms", type: :request do
         end
 
         it "returned form with right datas" do
-          expect(json).to eql(JSON.parse(@form.to_json))
+          expect(json.except('questions')).to eql(JSON.parse(@form.to_json))
         end
 
         it "returned associated questions" do
