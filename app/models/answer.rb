@@ -4,7 +4,7 @@ class Answer < ApplicationRecord
   accepts_nested_attributes_for :questions_answers
   validates :form, presence: true
 
-  def self.create_with_questions form, questions_answers
+  def self.create_with_questions_answers form, questions_answers
     answer = nil
     ActiveRecord::Base.transaction do
       answer = Answer.create(form: form)
