@@ -12,7 +12,7 @@ gem 'pg', '~> 0.18'
 gem 'puma', '~> 4.3'
 gem 'rack-attack'
 gem 'rack-cors'
-gem 'rails', '~> 5.0.1'
+gem 'rails', '~> 7.0'
 gem 'rubocop', require: false
 
 group :development, :test do
